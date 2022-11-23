@@ -1,0 +1,41 @@
+---
+- name: Apt-get update 
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install essential packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: somerepo |no apt key
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.gpg
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: set up the repository  
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+    filename: docker.list
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install docker essential packages
+  apt:
+    name: "{{ docker_packages }}"
+    state: present
+...
