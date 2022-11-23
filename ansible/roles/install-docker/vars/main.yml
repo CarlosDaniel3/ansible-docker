@@ -3,6 +3,8 @@ packages:
   - curl 
   - gnupg 
   - lsb-release
+  - python3-pip
+  - python3-setuptools
 
 
 docker_packages:
@@ -10,3 +12,4 @@ docker_packages:
   - docker-ce-cli 
   - containerd.io 
   - docker-compose-plugin
+

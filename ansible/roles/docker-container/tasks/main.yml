@@ -1,0 +1,6 @@
+- name: Create a data container
+  docker_container:
+    name: nginx-container
+    image: nginx
+    ports:
+      - "8080:80"

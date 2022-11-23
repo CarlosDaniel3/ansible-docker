@@ -38,4 +38,8 @@
   apt:
     name: "{{ docker_packages }}"
     state: present
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
 ...
